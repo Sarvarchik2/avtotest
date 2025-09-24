@@ -512,6 +512,27 @@ a {
 }
 
 
+/* Progress bar inside ticket cards */
+
+.ticket-progress {
+    margin-top: 10px;
+}
+
+.progress-bar {
+    height: 8px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.08);
+    overflow: hidden;
+    border: 1px solid var(--border);
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--primary), var(--accent));
+    transition: width 0.25s ease;
+}
+
+
 /* Contact / About section */
 
 .contact {

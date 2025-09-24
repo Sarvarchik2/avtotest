@@ -5,6 +5,7 @@ import nodeCrypto from 'node:crypto';
 import { parentPort, threadId } from 'node:worker_threads';
 import { defineEventHandler, handleCacheHeaders, splitCookiesString, createEvent, fetchWithEvent, isEvent, eventHandler, setHeaders, sendRedirect, proxyRequest, getRequestHeader, setResponseHeaders, setResponseStatus, send, getRequestHeaders, setResponseHeader, appendResponseHeader, getRequestURL, getResponseHeader, removeResponseHeader, createError, getQuery as getQuery$1, readBody, createApp, createRouter as createRouter$1, toNodeListener, lazyEventHandler, getResponseStatus, getRouterParam, getResponseStatusText } from 'file://E:/VUE%20projects/avtotest/node_modules/h3/dist/index.mjs';
 import { escapeHtml } from 'file://E:/VUE%20projects/avtotest/node_modules/@vue/shared/dist/shared.cjs.js';
+import { readFile } from 'node:fs/promises';
 import { createRenderer, getRequestDependencies, getPreloadLinks, getPrefetchLinks } from 'file://E:/VUE%20projects/avtotest/node_modules/vue-bundle-renderer/dist/runtime.mjs';
 import { parseURL, withoutBase, joinURL, getQuery, withQuery, withTrailingSlash, decodePath, withLeadingSlash, withoutTrailingSlash, joinRelativeURL } from 'file://E:/VUE%20projects/avtotest/node_modules/ufo/dist/index.mjs';
 import destr, { destr as destr$1 } from 'file://E:/VUE%20projects/avtotest/node_modules/destr/dist/index.mjs';
@@ -22,7 +23,6 @@ import { createStorage, prefixStorage } from 'file://E:/VUE%20projects/avtotest/
 import unstorage_47drivers_47fs from 'file://E:/VUE%20projects/avtotest/node_modules/unstorage/drivers/fs.mjs';
 import { digest } from 'file://E:/VUE%20projects/avtotest/node_modules/ohash/dist/index.mjs';
 import { toRouteMatcher, createRouter } from 'file://E:/VUE%20projects/avtotest/node_modules/radix3/dist/index.mjs';
-import { readFile } from 'node:fs/promises';
 import consola, { consola as consola$1 } from 'file://E:/VUE%20projects/avtotest/node_modules/consola/dist/index.mjs';
 import { ErrorParser } from 'file://E:/VUE%20projects/avtotest/node_modules/youch-core/build/index.js';
 import { Youch } from 'file://E:/VUE%20projects/avtotest/node_modules/youch/build/index.js';
@@ -1114,7 +1114,22 @@ const plugins = [
 _8HEdznDwW1xBDv3QnrH9TLbOykKRF5xcQTl0czqr0Bo
 ];
 
-const assets = {};
+const assets = {
+  "/index.mjs": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"126b4-Vu93SktVNLEQvNvv5nMmNbAq+cM\"",
+    "mtime": "2025-09-24T20:34:22.330Z",
+    "size": 75444,
+    "path": "index.mjs"
+  },
+  "/index.mjs.map": {
+    "type": "application/json",
+    "etag": "\"46775-rPE0OzxWTudD3p4qt6jyJQs4Clk\"",
+    "mtime": "2025-09-24T20:34:22.330Z",
+    "size": 288629,
+    "path": "index.mjs.map"
+  }
+};
 
 function readAsset (id) {
   const serverDir = dirname$1(fileURLToPath(globalThis._importMeta_.url));
@@ -1521,10 +1536,12 @@ async function getIslandContext(event) {
   return ctx;
 }
 
+const _lazy_Ynnuwt = () => Promise.resolve().then(function () { return _id__get$1; });
 const _lazy_RZ1q01 = () => Promise.resolve().then(function () { return renderer$1; });
 
 const handlers = [
   { route: '', handler: _f7IU4w, lazy: false, middleware: true, method: undefined },
+  { route: '/api/tickets/:id', handler: _lazy_Ynnuwt, lazy: true, middleware: false, method: "get" },
   { route: '/__nuxt_error', handler: _lazy_RZ1q01, lazy: true, middleware: false, method: undefined },
   { route: '/__nuxt_island/**', handler: _SxA8c9, lazy: false, middleware: false, method: undefined },
   { route: '/**', handler: _lazy_RZ1q01, lazy: true, middleware: false, method: undefined }
@@ -1856,6 +1873,34 @@ const styles = {};
 const styles$1 = /*#__PURE__*/Object.freeze(/*#__PURE__*/Object.defineProperty({
   __proto__: null,
   default: styles
+}, Symbol.toStringTag, { value: 'Module' }));
+
+const _id__get = defineEventHandler(async (event) => {
+  const id = getRouterParam(event, "id");
+  if (!id)
+    throw createError({
+      statusCode: 400,
+      statusMessage: "Ticket id is required"
+    });
+  const filePath = join(
+    process.cwd(),
+    "server",
+    "data",
+    "tickets",
+    `${id}.json`
+  );
+  try {
+    const raw = await readFile(filePath, "utf-8");
+    const data = JSON.parse(raw);
+    return data;
+  } catch (e) {
+    throw createError({ statusCode: 404, statusMessage: "Ticket not found" });
+  }
+});
+
+const _id__get$1 = /*#__PURE__*/Object.freeze(/*#__PURE__*/Object.defineProperty({
+  __proto__: null,
+  default: _id__get
 }, Symbol.toStringTag, { value: 'Module' }));
 
 function renderPayloadResponse(ssrContext) {
