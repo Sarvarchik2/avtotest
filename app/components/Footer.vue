@@ -191,11 +191,6 @@ const currentYear = new Date().getFullYear()
     gap: 20px;
 }
 
-.footer-copyright p {
-    color: #95a5a6;
-    font-size: 0.9rem;
-}
-
 .footer-legal {
     display: flex;
     align-items: center;
