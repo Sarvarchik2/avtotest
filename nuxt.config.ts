@@ -2,6 +2,7 @@
 export default defineNuxtConfig({
   // Use the new app/ directory as the source root
   srcDir: 'app',
+  css: ['~/assets/css/main.css'],
   compatibilityDate: '2025-07-15',
   devtools: { enabled: true }
 })
