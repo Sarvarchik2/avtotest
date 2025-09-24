@@ -511,6 +511,67 @@ a {
     background: rgba(255, 255, 255, 0.06);
 }
 
+
+/* Contact / About section */
+
+.contact {
+    padding: 20px 0 64px;
+}
+
+.contact-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 16px;
+}
+
+.contact .card {
+    padding: 20px;
+}
+
+.contact-title {
+    margin: 4px 0 10px;
+    font-weight: 800;
+}
+
+.about-list {
+    margin: 10px 0 8px;
+    padding-left: 18px;
+}
+
+.about-list li {
+    margin: 4px 0;
+    color: var(--text);
+}
+
+.contact-item {
+    display: block;
+    padding: 10px 12px;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    margin: 8px 0;
+    background: rgba(255, 255, 255, 0.04);
+    color: var(--text);
+}
+
+.contact-item:hover {
+    background: rgba(255, 255, 255, 0.07);
+}
+
+.contact-note {
+    margin-top: 6px;
+}
+
+.disclaimer {
+    text-align: center;
+    margin-top: 18px;
+}
+
+@media (max-width: 920px) {
+    .contact-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
 .ticket-action {
     margin-left: 8px;
     color: var(--muted);
@@ -653,9 +714,42 @@ a:hover {
     .hero {
         padding: 56px 16px;
     }
+    .contact-grid {
+        grid-template-columns: 1fr;
+    }
     .features {
         padding: 40px 0;
     }
+}
+
+.support {
+    padding: 12px 0 64px;
+}
+
+.support-card {
+    padding: 20px;
+}
+
+.copy-row {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.card-number {
+    flex: 1;
+    padding: 12px 14px;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.04);
+    font-weight: 700;
+    letter-spacing: 1.2px;
+}
+
+.copy-ok {
+    margin-top: 8px;
+    color: var(--success);
 }
 
 

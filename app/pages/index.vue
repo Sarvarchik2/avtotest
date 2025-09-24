@@ -191,10 +191,87 @@
                 </div>
             </div>
         </section>
+
+        <!-- CONTACTS / ABOUT -->
+        <section class="contact">
+            <div class="container">
+                <div class="section-row">
+                    <div class="icon">🤝</div>
+                    <div class="title">О проекте и контакты</div>
+                </div>
+
+                <div class="contact-grid">
+                    <div class="card about">
+                        <h3 class="contact-title">Мы — IT‑команда</h3>
+                        <p class="muted">Этот сервис создан энтузиастами, чтобы помогать готовиться к экзамену ПДД
+                            быстро и удобно. Проект полностью бесплатный для пользователей, без скрытых платежей.</p>
+                        <p>Также мы — аутсорсинг IT‑компания и делаем цифровые проекты «под ключ» на заказ: сайты,
+                            веб‑приложения, интеграции.
+                            Если хотите подобный продукт для вашего бизнеса — свяжитесь с нами или посетите наш сайт
+                            <a href="https://link-digital.uz/" target="_blank" rel="noopener" class="btn btn-outline"
+                                style="padding:8px 12px; height:auto; margin-left:6px">Link</a>.
+                        </p>
+                        <ul class="about-list">
+                            <li>Современный интерфейс и «тёмная» тема</li>
+                            <li>Экзамен на 20 вопросов и тренировки по темам</li>
+                            <li>Справочник знаков и пояснения к ответам</li>
+                        </ul>
+                        <p class="muted">Мы развиваем продукт на основе обратной связи. Если у вас есть идеи или вы
+                            нашли неточность — напишите нам.</p>
+                    </div>
+
+                    <div class="card contact-card">
+                        <h3 class="contact-title">Контакты</h3>
+                        <a class="contact-item" href="mailto:hello@avtotest.local">📧 hello@avtotest.local</a>
+                        <a class="contact-item" href="https://t.me/avtotest_support" target="_blank" rel="noopener">💬
+                            Telegram: @avtotest_support</a>
+                        <a class="contact-item" href="tel:+79990000000">📞 +7 (999) 000-00-00</a>
+                        <div class="contact-note muted">По вопросам сотрудничества, предложений и баг‑репортов — будем
+                            рады вашему письму.</div>
+                    </div>
+                </div>
+
+                <div class="disclaimer muted">Материалы сайта предназначены для учебных целей. Проверяйте актуальность
+                    правил ПДД на официальных источниках.</div>
+            </div>
+        </section>
+
+        <!-- SUPPORT / DONATION -->
+        <section class="support">
+            <div class="container">
+                <div class="section-row">
+                    <div class="icon">💙</div>
+                    <div class="title">Поддержать проект</div>
+                </div>
+
+                <div class="card support-card">
+                    <p class="muted">Если вам нравится АвтоТест и вы хотите поддержать развитие — можно отправить любой
+                        перевод на номер карты ниже. Спасибо за вашу поддержку!</p>
+                    <div class="copy-row">
+                        <div class="card-number" title="Номер карты" aria-label="Номер карты">{{ supportCard }}</div>
+                        <button class="btn btn-outline" @click="copyCard" :disabled="copied">{{ copied ? 'Скопировано' :
+                            'Скопировать' }}</button>
+                    </div>
+                    <div v-if="copied" class="copy-ok">Номер скопирован в буфер обмена</div>
+                </div>
+            </div>
+        </section>
     </div>
 </template>
 
 <script setup>
+const supportCard = '8600 1234 5678 9012'
+const copied = ref(false)
+async function copyCard() {
+    try {
+        await navigator.clipboard.writeText(supportCard)
+        copied.value = true
+        setTimeout(() => copied.value = false, 2000)
+    } catch (e) {
+        console.error('Copy failed', e)
+    }
+}
+
 useHead({
     title: 'АвтоТест - Подготовка к экзамену ПДД',
     meta: [{ name: 'description', content: 'Подготовка к экзамену ПДД: тесты, билеты, справочник знаков' }]
