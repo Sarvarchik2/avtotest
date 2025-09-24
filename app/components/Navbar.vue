@@ -48,11 +48,12 @@ const closeMenu = () => {
 
 <style scoped>
 .navbar {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
     position: sticky;
     top: 0;
     z-index: 1000;
+    border-bottom: 1px solid var(--border);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
 }
 
 .navbar-container {
@@ -69,23 +70,24 @@ const closeMenu = () => {
     display: flex;
     align-items: center;
     text-decoration: none;
-    color: white;
-    font-weight: bold;
-    font-size: 1.5rem;
-    transition: transform 0.3s ease;
+    color: var(--text);
+    font-weight: 800;
+    font-size: 1.2rem;
+    letter-spacing: .2px;
+    transition: transform 0.25s ease;
 }
 
 .navbar-brand:hover {
-    transform: scale(1.05);
+    transform: translateY(-1px);
 }
 
 .brand-icon {
-    font-size: 2rem;
+    font-size: 1.6rem;
     margin-right: 10px;
 }
 
 .brand-text {
-    color: white;
+    color: var(--text);
 }
 
 .navbar-menu {
@@ -95,27 +97,41 @@ const closeMenu = () => {
 
 .navbar-nav {
     display: flex;
-    gap: 30px;
+    gap: 22px;
 }
 
 .nav-link {
-    color: white;
+    color: var(--text);
     text-decoration: none;
-    font-weight: 500;
+    font-weight: 600;
     position: relative;
-    transition: all 0.3s ease;
-    padding: 8px 16px;
-    border-radius: 25px;
+    transition: color .2s ease, transform .2s ease;
+    padding: 10px 6px;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    left: 6px;
+    right: 6px;
+    bottom: 4px;
+    height: 2px;
+    background: linear-gradient(90deg, var(--primary), var(--accent));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform .25s ease;
 }
 
 .nav-link:hover {
-    background: rgba(255, 255, 255, 0.2);
-    transform: translateY(-2px);
+    transform: translateY(-1px);
 }
 
-.nav-link.router-link-active {
-    background: rgba(255, 255, 255, 0.3);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+.nav-link:hover::after {
+    transform: scaleX(1);
+}
+
+.nav-link.router-link-active::after {
+    transform: scaleX(1);
 }
 
 .navbar-burger {
@@ -132,8 +148,8 @@ const closeMenu = () => {
 .navbar-burger span {
     width: 100%;
     height: 2px;
-    background: white;
-    transition: 0.3s;
+    background: var(--text);
+    transition: .3s;
 }
 
 @media (max-width: 768px) {
@@ -146,12 +162,15 @@ const closeMenu = () => {
         top: 70px;
         left: 0;
         right: 0;
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        transform: translateY(-100%);
+        background: rgba(15, 21, 48, 0.9);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        transform: translateY(-8px);
         opacity: 0;
         visibility: hidden;
-        transition: all 0.3s ease;
-        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+        transition: all .25s ease;
+        border-bottom: 1px solid var(--border);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, .35);
     }
 
     .navbar-menu.is-active {
@@ -162,13 +181,12 @@ const closeMenu = () => {
 
     .navbar-nav {
         flex-direction: column;
-        padding: 20px;
-        gap: 15px;
+        padding: 18px;
+        gap: 12px;
     }
 
     .nav-link {
-        padding: 15px 20px;
-        border-radius: 10px;
+        padding: 14px 6px;
         text-align: center;
     }
 
